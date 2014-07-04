@@ -8,11 +8,11 @@ def _destroy_cb(widget, data=None):
 
 
 def __go_next_cb(entry, icon_pos, data=None):
-    print 'Go next'
+    print('Go next')
 
 
 def __entry_activate_cb(widget, data=None):
-    print 'Entry activate'
+    print('Entry activate')
 
 w = Gtk.Window()
 w.connect("destroy", _destroy_cb)

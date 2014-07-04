@@ -113,7 +113,7 @@ class DSMetadata(GObject.GObject):
         return key in self._properties
 
     def keys(self):
-        return self._properties.keys()
+        return list(self._properties.keys())
 
     def get_dictionary(self):
         return self._properties
@@ -129,7 +129,7 @@ class DSMetadata(GObject.GObject):
 
     def update(self, properties):
         """Update all of the metadata"""
-        for (key, value) in properties.items():
+        for (key, value) in list(properties.items()):
             self[key] = value
 
 

@@ -81,7 +81,7 @@ def is_hex(s):
 
 def validate_activity_id(actid):
     """Validate an activity ID."""
-    if not isinstance(actid, (str, unicode)):
+    if not isinstance(actid, str):
         return False
     if len(actid) != ACTIVITY_ID_LEN:
         return False
@@ -165,7 +165,7 @@ class LRU:
                 return
             a = self.first
             a.next.prev = None
-            self.first = a.next
+            self.first = a.__next__
             a.next = None
             del self.d[a.me[0]]
             del a
@@ -173,10 +173,10 @@ class LRU:
     def __delitem__(self, obj):
         nobj = self.d[obj]
         if nobj.prev:
-            nobj.prev.next = nobj.next
+            nobj.prev.next = nobj.__next__
         else:
-            self.first = nobj.next
-        if nobj.next:
+            self.first = nobj.__next__
+        if nobj.__next__:
             nobj.next.prev = nobj.prev
         else:
             self.last = nobj.prev
@@ -185,14 +185,14 @@ class LRU:
     def __iter__(self):
         cur = self.first
         while cur is not None:
-            cur2 = cur.next
+            cur2 = cur.__next__
             yield cur.me[1]
             cur = cur2
 
     def iteritems(self):
         cur = self.first
         while cur is not None:
-            cur2 = cur.next
+            cur2 = cur.__next__
             yield cur.me
             cur = cur2
 
@@ -200,11 +200,11 @@ class LRU:
         return iter(self.d)
 
     def itervalues(self):
-        for i_, j in self.iteritems():
+        for i_, j in self.items():
             yield j
 
     def keys(self):
-        return self.d.keys()
+        return list(self.d.keys())
 
 
 units = [['%d year', '%d years', 356 * 24 * 60 * 60],
@@ -331,7 +331,7 @@ class TempFilePath(str):
 
 def _cleanup_temp_files():
     logging.debug('_cleanup_temp_files')
-    for path in _tracked_paths.keys():
+    for path in list(_tracked_paths.keys()):
         try:
             os.unlink(path)
         except:

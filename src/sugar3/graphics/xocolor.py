@@ -207,7 +207,7 @@ colors = [['#B20008', '#FF2B34'],
 
 
 def _parse_string(color_string):
-    if not isinstance(color_string, (str, unicode)):
+    if not isinstance(color_string, str):
         logging.error('Invalid color string: %r', color_string)
         return None
 
@@ -263,12 +263,12 @@ if __name__ == '__main__':
 
     f = open(sys.argv[1], 'r')
 
-    print 'colors = ['
+    print('colors = [')
 
     for line in f.readlines():
         match = re.match(r'fill: ([A-Z0-9]*) stroke: ([A-Z0-9]*)', line)
-        print "['#%s', '#%s'], \\" % (match.group(2), match.group(1))
+        print("['#%s', '#%s'], \\" % (match.group(2), match.group(1)))
 
-    print ']'
+    print(']')
 
     f.close()

@@ -21,10 +21,10 @@
 UNSTABLE.
 """
 
-from ConfigParser import ConfigParser
+from configparser import ConfigParser
 import tempfile
 import os
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 from sugar3 import env
 from sugar3.bundle.bundle import Bundle, MalformedBundleException
@@ -142,7 +142,7 @@ class ContentBundle(Bundle):
 
     def get_start_uri(self):
         path = os.path.join(self.get_path(), self._activity_start)
-        return 'file://' + urllib.pathname2url(path)
+        return 'file://' + urllib.request.pathname2url(path)
 
     def get_bundle_id(self):
         return self._global_name

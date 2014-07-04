@@ -8,7 +8,7 @@ def _destroy_cb(widget, data=None):
 
 
 def __combo_changed_cb(widget, data=None):
-    print 'combo-changed'
+    print('combo-changed')
 
 w = Gtk.Window()
 w.connect("destroy", _destroy_cb)

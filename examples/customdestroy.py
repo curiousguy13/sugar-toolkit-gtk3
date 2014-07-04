@@ -12,14 +12,14 @@ class MyCellRenderer(Gtk.CellRenderer):
         Gtk.CellRenderer.__init__(self)
 
     def __del__(self):
-        print "cellrenderer destroy"
+        print("cellrenderer destroy")
 
     def do_render(self, cairo_t, widget, background_area, cell_area, flags):
         pass
 
 
 def window_destroy_cb(*kwargs):
-    print "window destroy"
+    print("window destroy")
     Gtk.main_quit()
 
 window = Gtk.Window(Gtk.WindowType.TOPLEVEL)
@@ -28,7 +28,7 @@ window.show()
 
 
 def treeview_destroy_cb(*kwargs):
-    print "treeview destroy"
+    print("treeview destroy")
 
 treeview = Gtk.TreeView()
 treeview.connect("destroy", treeview_destroy_cb)

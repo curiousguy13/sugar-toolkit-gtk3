@@ -54,7 +54,7 @@ import os
 import time
 from hashlib import sha1
 from functools import partial
-import StringIO
+import io
 import cairo
 import json
 
@@ -739,7 +739,7 @@ class Activity(Window, Gtk.Container):
         cr.set_source_surface(screenshot_surface)
         cr.paint()
 
-        preview_str = StringIO.StringIO()
+        preview_str = io.StringIO()
         preview_surface.write_to_png(preview_str)
         return preview_str.getvalue()
 
@@ -775,7 +775,7 @@ class Activity(Window, Gtk.Container):
 
         buddies_dict = self._get_buddies()
         if buddies_dict:
-            self.metadata['buddies_id'] = json.dumps(buddies_dict.keys())
+            self.metadata['buddies_id'] = json.dumps(list(buddies_dict.keys()))
             self.metadata['buddies'] = json.dumps(self._get_buddies())
 
         preview = self.get_preview()
@@ -1088,7 +1088,7 @@ class _ClientHandler(dbus.service.Object, DBusProperties):
                 handle_type = properties[CHANNEL + '.TargetHandleType']
                 if channel_type == CHANNEL_TYPE_TEXT:
                     self._got_channel_cb(connection, object_path, handle_type)
-        except Exception, e:
+        except Exception as e:
             logging.exception(e)
 
 _session = None

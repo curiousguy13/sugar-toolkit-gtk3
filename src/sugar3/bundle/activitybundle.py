@@ -20,7 +20,7 @@
 UNSTABLE.
 """
 
-from ConfigParser import ConfigParser
+from configparser import ConfigParser
 from locale import normalize
 import os
 import shutil
@@ -410,7 +410,7 @@ class ActivityBundle(Bundle):
         if delete_profile:
             bundle_profile_path = env.get_profile_path(self._bundle_id)
             if os.path.exists(bundle_profile_path):
-                os.chmod(bundle_profile_path, 0775)
+                os.chmod(bundle_profile_path, 0o775)
                 shutil.rmtree(bundle_profile_path, ignore_errors=True)
 
         self._uninstall(install_path)

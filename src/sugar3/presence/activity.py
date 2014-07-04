@@ -234,7 +234,7 @@ class Activity(GObject.GObject):
         returns list of presence Buddy objects that we can successfully
         create from the buddy object paths that PS has for this activity.
         """
-        return self._joined_buddies.values()
+        return list(self._joined_buddies.values())
 
     def get_buddy_by_handle(self, handle):
         """Retrieve the Buddy object given a telepathy handle.

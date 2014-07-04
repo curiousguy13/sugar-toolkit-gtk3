@@ -55,8 +55,8 @@ class _SVGLoader(object):
             if cache:
                 self._cache[file_name] = icon
 
-        for entity, value in entities.items():
-            if isinstance(value, basestring):
+        for entity, value in list(entities.items()):
+            if isinstance(value, str):
                 xml = '<!ENTITY %s "%s">' % (entity, value)
                 icon = re.sub('<!ENTITY %s .*>' % entity, xml, icon)
             else:
@@ -552,7 +552,7 @@ class EventIcon(Gtk.EventBox):
         self.add_events(Gdk.EventMask.BUTTON_PRESS_MASK |
                         Gdk.EventMask.TOUCH_MASK |
                         Gdk.EventMask.BUTTON_RELEASE_MASK)
-        for key, value in kwargs.iteritems():
+        for key, value in kwargs.items():
             self.set_property(key, value)
 
         from sugar3.graphics.palette import CursorInvoker
@@ -1069,6 +1069,6 @@ def get_surface(**kwargs):
 
         """
     icon = _IconBuffer()
-    for key, value in kwargs.items():
+    for key, value in list(kwargs.items()):
         icon.__setattr__(key, value)
     return icon.get_surface()

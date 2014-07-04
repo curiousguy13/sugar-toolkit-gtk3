@@ -18,7 +18,7 @@
 UNSTABLE.
 """
 
-from __future__ import absolute_import
+
 
 import logging
 import os
@@ -67,7 +67,7 @@ class UITestCase(unittest.TestCase):
         if self.bundle_id is not None:
             process = subprocess.Popen(["sugar-launch", self.bundle_id])
         else:
-            print "No bundle_id specified."
+            print("No bundle_id specified.")
             return
 
         try:

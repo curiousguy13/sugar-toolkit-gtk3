@@ -103,7 +103,7 @@ class BaseBuddy(GObject.GObject):
     def get_current_activity(self):
         if self._current_activity is None:
             return None
-        for activity in self._activities.values():
+        for activity in list(self._activities.values()):
             if activity.props.id == self._current_activity:
                 return activity
         return None

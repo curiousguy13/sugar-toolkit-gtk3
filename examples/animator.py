@@ -19,7 +19,7 @@ class _Animation(animator.Animation):
 
 
 def __animation_completed_cb(anim):
-    print 'Animation completed'
+    print('Animation completed')
 
 
 def _destroy_cb(widget, data=None):
